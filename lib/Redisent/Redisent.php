@@ -50,7 +50,7 @@ class Redisent {
      */
     function __construct($host, $port = 6379) {
         $this->host = $host;
-        $this->port = $port;
+        $this->port = $port ?: 6379;
 				$this->establishConnection();
     }
 
