@@ -106,6 +106,10 @@ class Resque
 	public static function enqueue($queue, $class, $args = null, $trackStatus = false)
 	{
 		require_once dirname(__FILE__) . '/Resque/Job.php';
+
+		if (!is_array($args) || array_values($args) !== $args)
+			$args = array($args);
+
 		$result = Resque_Job::create($queue, $class, $args, $trackStatus);
 		if ($result) {
 			Resque_Event::trigger('afterEnqueue', array(
